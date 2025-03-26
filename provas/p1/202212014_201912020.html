@@ -96,7 +96,7 @@
         }
 
         if (ano_saida !== '' && (!apenasNumeros.test(ano_saida) || parseInt(ano_saida) > anoAtual || parseInt(ano_entrada) > parseInt(ano_saida))) {
-          mensagem.text('Se preenchido, o ano de saída deve conter apenas números, não ser maior que o ano de entrada e não pode ser maior que ' + anoAtual);
+          mensagem.text('O ano de saída pode ser vazio, mas se preenchido, deve conter apenas números, não ser maior que o ano de entrada e não pode ser maior que ' + anoAtual);
           return;
         }
 
@@ -131,15 +131,15 @@
         }
 
         $.ajax({
-          url: 'https://jsonplaceholder.typicode.com/posts', 
+          url: 'https://jsonplaceholder.typicode.com/posts',
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify(dadosFormulario),
           success: function (response) {
-           
+
             $('#mensagem').text('');
             console.log('Dados enviados com sucesso', response);
-          }, 
+          },
           error: function (xhr, status, error) {
             console.log('Erro no envio: ' + error);
             $('#mensagem').text('Erro no envio!');
@@ -148,13 +148,17 @@
         });
 
 
-
-
-
-        alert('Formulário enviado com sucesso!\nNome: ' + nome);
-
+        alert('Formulário enviado com sucesso');
 
       });
+
+      $('#limpar').on('click', function (event) {
+        event.preventDefault();
+        $('#form')[0].reset();
+        $('#mensagem').text('');
+      });
+
+
     });
 
 
@@ -197,7 +201,7 @@
       </tr>
       <tr>
         <td><button id="enviar" class="submit-btn" type="submit">Enviar</button></td>
-        <td><button id="limpar" type="reset">Limpar</button></td>
+        <td><button id="limpar">Limpar</button></td>
       </tr>
     </table>
 
